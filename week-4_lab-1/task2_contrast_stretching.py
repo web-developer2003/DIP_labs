@@ -2,23 +2,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ─────────────────────────────────────────────
-#  Contrast Stretching Function
-#  s = ((smax - smin) / (rmax - rmin)) * (r - rmin) + smin
-# ─────────────────────────────────────────────
-
 def contrast_stretching(i_in, smax, smin):
-    """
-    Apply contrast stretching to an image.
-
-    Parameters:
-        i_in : input image (uint8 or float32)
-        smax : desired maximum output intensity
-        smin : desired minimum output intensity
-
-    Returns:
-        Stretched image as float32 (same range as smin–smax)
-    """
+    
     img = i_in.astype('float32')
 
     rmin = float(img.min())
@@ -66,13 +51,7 @@ def show_and_save(original, result, title, filename, smax, smin, normalized=Fals
     plt.savefig(filename, dpi=150)
     plt.show()
     print(f"Saved: {filename}")
-
-
-# ─────────────────────────────────────────────
-#  Load images  (fill in your own paths below)
-# ─────────────────────────────────────────────
-
-# TODO: replace the empty strings with your actual image paths
+    
 img1 = cv2.imread("dark.jpg")   # dark image  → needs gamma < 1  (e.g. 0.4) to brighten
 img2 = cv2.imread("light.jpg")   # bright image → needs gamma > 1  (e.g. 2.5) to darken
 img3 = cv2.imread("lowjpg.jpg")   # low-contrast → try gamma ~ 0.5

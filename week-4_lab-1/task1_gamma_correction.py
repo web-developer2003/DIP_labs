@@ -2,23 +2,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ─────────────────────────────────────────────
-#  Gamma Correction Function
-#  T(r) = c * r^gamma
-# ─────────────────────────────────────────────
 
 def gamma_correction(c, gamma, I_in):
-    """
-    Apply power-law (gamma) transformation to an image.
-
-    Parameters:
-        c     : intensity scaling factor
-        gamma : exponent (>1 darkens, <1 brightens)
-        I_in  : input image (uint8, BGR or grayscale)
-
-    Returns:
-        Transformed image as uint8 (0-255)
-    """
+    
     # Step 1 – normalize to [0, 1]
     I_norm = I_in.astype('float32') / 255
 
@@ -34,13 +20,6 @@ def gamma_correction(c, gamma, I_in):
     return I_out
 
 
-# ─────────────────────────────────────────────
-#  Load images  (fill in your own paths below)
-# ─────────────────────────────────────────────
-
-# TODO: replace the empty strings with your actual image paths
-#       e.g.  cv2.imread(r"C:\images\dark_image.jpg")
-
 img1 = cv2.imread("dark.jpg")   # dark image  → needs gamma < 1  (e.g. 0.4) to brighten
 img2 = cv2.imread("light.jpg")   # bright image → needs gamma > 1  (e.g. 2.5) to darken
 img3 = cv2.imread("lowjpg.jpg")   # low-contrast → try gamma ~ 0.5
@@ -52,12 +31,8 @@ titles = ["Image 1", "Image 2", "Image 3", "Image 4", "Image 5"]
 
 # Gamma values chosen per image – adjust after visual inspection
 gammas = [0.4, 2.5, 0.5, 2.0, 1.0]
-c = 1  # scaling factor (keep at 1 unless otherwise needed)
+c = 1  # scaling factor (keep at 1 unless otherwise
 
-
-# ─────────────────────────────────────────────
-#  Task 1-1 & 1-2 : Apply gamma and display
-# ─────────────────────────────────────────────
 
 for i, (img, gamma, title) in enumerate(zip(images, gammas, titles)):
     if img is None:
@@ -90,13 +65,6 @@ for i, (img, gamma, title) in enumerate(zip(images, gammas, titles)):
     else:
         print("γ=1 leaves the image unchanged (baseline test).")
 
-
-# ─────────────────────────────────────────────
-#  Task 1-3 : Saving the normalized (float32) image
-#             Problem: cv2.imwrite expects uint8 – float32 in [0,1]
-#             produces a near-black image or an error.
-#             Fix: multiply by 255 and cast to uint8 first.
-# ─────────────────────────────────────────────
 
 if img1 is not None:
     I_norm = img1.astype('float32') / 255
