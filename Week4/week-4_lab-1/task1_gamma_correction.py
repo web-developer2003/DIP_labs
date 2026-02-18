@@ -31,7 +31,7 @@ titles = ["Image 1", "Image 2", "Image 3", "Image 4", "Image 5"]
 
 # Gamma values chosen per image – adjust after visual inspection
 gammas = [0.4, 2.5, 0.5, 2.0, 1.0]
-c = 1  # scaling factor (keep at 1 unless otherwise
+c = 1  # scaling factor
 
 
 for i, (img, gamma, title) in enumerate(zip(images, gammas, titles)):
